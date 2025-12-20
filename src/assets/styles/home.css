@@ -1,0 +1,41 @@
+/* Hiệu ứng nổi của ảnh hero */
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-14px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.animate-float {
+  animation: float 5.5s ease-in-out infinite;
+  will-change: transform;
+}
+
+.animate-float.delay-100 {
+  animation-delay: 0.1s;
+}
+
+.animate-float.delay-200 {
+  animation-delay: 0.2s;
+}
+
+/* Fade-in khi cuộn */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in-up {
+  animation: fadeInUp 1s ease forwards;
+}
