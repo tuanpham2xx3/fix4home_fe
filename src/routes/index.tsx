@@ -15,6 +15,7 @@ import MovingService from "@/pages/User/MovingService";
 import DrainCleaningService from "@/pages/User/DrainCleaningService";
 import AppIntroPage from "@/pages/User/AppIntroPage";
 import PricingPage from "@/pages/User/PricingPage";
+import ContactPage from "@/pages/User/ContactPage";
 
 const AppRoutes: React.FC = () => {
   return (
@@ -115,6 +116,14 @@ const AppRoutes: React.FC = () => {
         element={
           <MainLayout>
             <PricingPage />
+          </MainLayout>
+        }
+      />
+       <Route
+        path="/lien-he"
+        element={
+          <MainLayout>
+            <ContactPage />
           </MainLayout>
         }
       />
