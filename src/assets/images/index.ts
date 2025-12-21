@@ -39,6 +39,16 @@ import ungDungStep2 from "./ungdungstep2.jpg";
 import ungDungStep3 from "./ungdungstep3.jpg";
 import ungDungStep4 from "./ungdungstep4.jpg";
 import ungDungStep5 from "./ungdungstep5.jpg";
+import xayDungImg from "./xaydungimg.png";
+import coKhiImg from "./cokhiimg.png";
+import dienNuocImg from "./diennuocimg.png";
+import dienLanhImg from "./dienlanhimg.png";
+import dienMayImg from "./dienmayimg.png";
+import doGoImg from "./dogoimg.png";
+import veSinhImg from "./vesinhimg.png";
+import chuyenNhaImg from "./chuyennha.png";
+import thongNghetImg from "./thongnghetimg.png";
+
 export {
   about,
   featureBg,
@@ -81,4 +91,13 @@ export {
   ungDungStep3,
   ungDungStep4,
   ungDungStep5,
+  xayDungImg,
+  coKhiImg,
+  dienNuocImg,
+  dienLanhImg,
+  dienMayImg,
+  doGoImg,
+  veSinhImg,
+  chuyenNhaImg,
+  thongNghetImg,
 };
