@@ -5,10 +5,12 @@ import {
   isValidVietnamPhone,
   isValidPassword,
 } from "@/utils/validators";
+import { useAuth } from "@/contexts/AuthContext";
 
 export type AuthMode = "login" | "register";
 
 export const useAuthForm = (mode: AuthMode) => {
+      const { login } = useAuth(); 
   const [form, setForm] = useState<Record<string, string>>({});
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [loading, setLoading] = useState(false);
@@ -52,16 +54,20 @@ export const useAuthForm = (mode: AuthMode) => {
     // ⏳ fake delay để mô phỏng call API
     await new Promise((res) => setTimeout(res, 1000));
 
-    if (mode === "login") {
-      localStorage.setItem(
-        "auth_user",
-        JSON.stringify({ identifier: form.identifier })
-      );
-    }
+   if (mode === "login") {
+  login({
+    name: form.name,        // nếu có
+    identifier: form.identifier,
+  });
+}
 
-    if (mode === "register") {
-      localStorage.setItem("auth_user", JSON.stringify(form));
-    }
+if (mode === "register") {
+  login({
+    name: form.name,
+    email: form.email,
+    phone: form.phone,
+  });
+}
 
     setLoading(false);
     return true;

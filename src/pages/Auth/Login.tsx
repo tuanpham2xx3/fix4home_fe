@@ -2,22 +2,25 @@ import AuthLayout from "@/components/auth/AuthLayout";
 import AuthForm from "@/components/auth/AuthForm";
 import { useAuthForm } from "@/hooks/useAuthForm";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const auth = useAuthForm("login");
+const navigate = useNavigate();
 
   return (
     <AuthLayout title="Đăng nhập">
-      <AuthForm
-        mode="login"
-        {...auth}
-        onSubmit={async () => {
-          const success = await auth.submit();
-          if (success) {
-            console.log("LOGIN OK");
-          }
-        }}
-      />
+     <AuthForm
+  mode="login"
+  {...auth}
+  onSubmit={async () => {
+    const success = await auth.submit();
+    if (success) {
+      navigate("/"); // ✅ về trang chủ
+    }
+  }}
+/>
+
 
       <div className="mt-4 text-right">
         <Link
