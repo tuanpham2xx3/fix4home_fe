@@ -48,6 +48,7 @@ import doGoImg from "./dogoimg.png";
 import veSinhImg from "./vesinhimg.png";
 import chuyenNhaImg from "./chuyennha.png";
 import thongNghetImg from "./thongnghetimg.png";
+import fixhomeLogo from "./fixhomelogo.png";
 
 export {
   about,
@@ -100,4 +101,5 @@ export {
   veSinhImg,
   chuyenNhaImg,
   thongNghetImg,
+  fixhomeLogo,
 };

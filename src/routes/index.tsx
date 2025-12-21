@@ -16,10 +16,28 @@ import DrainCleaningService from "@/pages/User/DrainCleaningService";
 import AppIntroPage from "@/pages/User/AppIntroPage";
 import PricingPage from "@/pages/User/PricingPage";
 import ContactPage from "@/pages/User/ContactPage";
+import Login from "@/pages/Auth/Login";
+import Register from "@/pages/Auth/Register";
 
 const AppRoutes: React.FC = () => {
   return (
     <Routes>
+        <Route
+        path="/dang-nhap"
+        element={
+          <MainLayout>
+            <Login />
+          </MainLayout>
+        }
+      />
+      <Route
+        path="/dang-ky"
+        element={
+          <MainLayout>
+            <Register />
+          </MainLayout>
+        }
+      />
       {/* Trang chủ */}
       <Route
         path="/"

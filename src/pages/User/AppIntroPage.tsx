@@ -241,7 +241,7 @@ const [currentStep, setCurrentStep] = useState(0);
             {review.comment}
           </p>
 
-          {/* Footer */}
+  
           <div className="flex items-center justify-between border-t pt-4">
             {/* User info */}
             <div className="flex items-center gap-3">
