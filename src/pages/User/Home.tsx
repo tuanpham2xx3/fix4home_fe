@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "../../assets/styles/home.css";
 import ServiceCard from "../../components/ServiceCard";
-import { services } from "../../mock/services";
+import { services } from "../../mocks/services";
 import {
   about,
   featureBg,
@@ -13,10 +13,11 @@ import {
   workflow2,
   workflow3,
   workflow4,
-  workflow5,  appPromo,
+  workflow5,
+  appPromo,
 } from "../../assets/images/";
-import { workflowSteps } from "../../mock/workflow";
-import { faqData } from "../../mock/faq";
+import { workflowSteps } from "../../mocks/workflow";
+import { faqData } from "../../mocks/faq";
 import WorkflowItem from "../../components/WorkflowItem";
 
 const imageMap: Record<string, string> = {
@@ -27,14 +28,13 @@ const imageMap: Record<string, string> = {
   workflow5,
 };
 
-
 const Home = () => {
   const [activeStep, setActiveStep] = useState(1);
   const currentImage =
     imageMap[
       workflowSteps.find((s) => s.id === activeStep)?.image || "workflow1"
     ];
-    const [activeFaq, setActiveFaq] = useState<number | null>(null);
+  const [activeFaq, setActiveFaq] = useState<number | null>(null);
   return (
     <main className="bg-light">
       {/* Hero Section */}
@@ -230,123 +230,120 @@ const Home = () => {
           </div>
         </div>
       </section>
-
       {/*map */}
-<section className="py-10 bg-white">
-  <div className="max-w-7xl mx-auto px-6">
-    <h2 className="text-center text-2xl md:text-3xl font-bold text-secondary mb-6 uppercase">
-      Khu Vực Thợ Đang Hoạt Động
-    </h2>
+      <section className="py-10 bg-white">
+        <div className="max-w-7xl mx-auto px-6">
+          <h2 className="text-center text-2xl md:text-3xl font-bold text-secondary mb-6 uppercase">
+            Khu Vực Thợ Đang Hoạt Động
+          </h2>
 
-    <div className="rounded-lg overflow-hidden shadow-md">
-      <iframe
-        title="Bản đồ khu vực hoạt động FixHome"
-       src="https://cskh.thoviet.com/map-tv585682011"
-        width="100%"
-        height="550"
-        style={{ border: 0 }}
-        allowFullScreen
-        loading="lazy"
-        referrerPolicy="no-referrer-when-downgrade"
-      ></iframe>
-    </div>
-  </div>
-</section>
-
-{/* ====== NHỮNG LO NGẠI KHI GỌI THỢ BÊN NGOÀI ====== */}
-<section className="py-12 bg-light">
-  <div className="max-w-7xl mx-auto px-6">
-    <h2 className="text-center text-2xl md:text-3xl font-bold text-secondary mb-10 uppercase">
-      Những Lo Ngại Khi Gọi Thợ Bên Ngoài
-    </h2>
-
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-      {[
-        {
-          id: "01",
-          title: "Nhân viên không có lí lịch rõ ràng, không an toàn",
-          desc: "Việc không biết rõ lý lịch của thợ sửa chữa là một mối lo ngại lớn, đặc biệt khi họ cần vào nhà hoặc nơi làm việc của bạn.",
-        },
-        {
-          id: "02",
-          title: "Làm xong nhưng khi bảo hành thì gọi không đến.",
-          desc: "Nhiều trường hợp sau khi sửa xong, nhưng không có thông tin rõ ràng, khiến khách hàng không thể liên hệ lại khi có sự cố.",
-        },
-        {
-          id: "03",
-          title: "Bất tiện, phải lưu nhiều số điện thoại của các đơn vị sửa chữa.",
-          desc: "Việc lưu quá nhiều số điện thoại của từng nhóm thợ khác nhau gây rối và bất tiện khi cần liên hệ gấp.",
-        },
-        {
-          id: "04",
-          title: "Phải trả phí nếu tới nơi mà khách không làm.",
-          desc: "Một số đơn vị thu phí nếu đến nơi mà khách không sử dụng dịch vụ, gây khó chịu cho khách hàng.",
-        },
-        {
-          id: "05",
-          title: "Khó khăn trong việc khiếu nại và hoàn tiền.",
-          desc: "Nếu dịch vụ không đạt chất lượng, khách hàng gặp khó khăn khi muốn khiếu nại hoặc yêu cầu hoàn tiền.",
-        },
-        {
-          id: "06",
-          title: "Không đảm bảo chất lượng, tay nghề thợ.",
-          desc: "Không có cam kết về tay nghề, thợ có thể làm ẩu hoặc gây hư hại thêm cho thiết bị.",
-        },
-      ].map((item) => (
-        <div
-          key={item.id}
-          className="bg-white rounded-xl shadow-sm p-6 border border-gray-100 hover:shadow-md transition-all"
-        >
-          <div className="flex items-start space-x-4">
-            <h3 className="text-4xl font-bold text-secondary">{item.id}</h3>
-            <div>
-              <p className="font-semibold text-dark mb-2">{item.title}</p>
-              <p className="text-sm text-muted">{item.desc}</p>
-            </div>
+          <div className="rounded-lg overflow-hidden shadow-md">
+            <iframe
+              title="Bản đồ khu vực hoạt động FixHome"
+              src="https://cskh.thoviet.com/map-tv585682011"
+              width="100%"
+              height="550"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            ></iframe>
           </div>
         </div>
-      ))}
-    </div>
-  </div>
-</section>
+      </section>
+      {/* ====== NHỮNG LO NGẠI KHI GỌI THỢ BÊN NGOÀI ====== */}
+      <section className="py-12 bg-light">
+        <div className="max-w-7xl mx-auto px-6">
+          <h2 className="text-center text-2xl md:text-3xl font-bold text-secondary mb-10 uppercase">
+            Những Lo Ngại Khi Gọi Thợ Bên Ngoài
+          </h2>
 
-{/* ====== CÂU HỎI THƯỜNG GẶP ====== */}
-<section className="py-12 bg-white">
-  <div className="max-w-4xl mx-auto px-6">
-    <h2 className="text-center text-2xl md:text-3xl font-bold text-secondary mb-10 uppercase">
-      Câu Hỏi Thường Gặp
-    </h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {[
+              {
+                id: "01",
+                title: "Nhân viên không có lí lịch rõ ràng, không an toàn",
+                desc: "Việc không biết rõ lý lịch của thợ sửa chữa là một mối lo ngại lớn, đặc biệt khi họ cần vào nhà hoặc nơi làm việc của bạn.",
+              },
+              {
+                id: "02",
+                title: "Làm xong nhưng khi bảo hành thì gọi không đến.",
+                desc: "Nhiều trường hợp sau khi sửa xong, nhưng không có thông tin rõ ràng, khiến khách hàng không thể liên hệ lại khi có sự cố.",
+              },
+              {
+                id: "03",
+                title:
+                  "Bất tiện, phải lưu nhiều số điện thoại của các đơn vị sửa chữa.",
+                desc: "Việc lưu quá nhiều số điện thoại của từng nhóm thợ khác nhau gây rối và bất tiện khi cần liên hệ gấp.",
+              },
+              {
+                id: "04",
+                title: "Phải trả phí nếu tới nơi mà khách không làm.",
+                desc: "Một số đơn vị thu phí nếu đến nơi mà khách không sử dụng dịch vụ, gây khó chịu cho khách hàng.",
+              },
+              {
+                id: "05",
+                title: "Khó khăn trong việc khiếu nại và hoàn tiền.",
+                desc: "Nếu dịch vụ không đạt chất lượng, khách hàng gặp khó khăn khi muốn khiếu nại hoặc yêu cầu hoàn tiền.",
+              },
+              {
+                id: "06",
+                title: "Không đảm bảo chất lượng, tay nghề thợ.",
+                desc: "Không có cam kết về tay nghề, thợ có thể làm ẩu hoặc gây hư hại thêm cho thiết bị.",
+              },
+            ].map((item) => (
+              <div
+                key={item.id}
+                className="bg-white rounded-xl shadow-sm p-6 border border-gray-100 hover:shadow-md transition-all"
+              >
+                <div className="flex items-start space-x-4">
+                  <h3 className="text-4xl font-bold text-secondary">
+                    {item.id}
+                  </h3>
+                  <div>
+                    <p className="font-semibold text-dark mb-2">{item.title}</p>
+                    <p className="text-sm text-muted">{item.desc}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+      {/* ====== CÂU HỎI THƯỜNG GẶP ====== */}
+      <section className="py-12 bg-white">
+        <div className="max-w-4xl mx-auto px-6">
+          <h2 className="text-center text-2xl md:text-3xl font-bold text-secondary mb-10 uppercase">
+            Câu Hỏi Thường Gặp
+          </h2>
 
-    <div className="bg-white rounded-xl shadow-sm p-4">
-      {faqData.map((item) => (
-        <WorkflowItem
-          key={item.id}
-          step={item}
-          isActive={activeFaq === item.id}
-          onClick={() =>
-            setActiveFaq(activeFaq === item.id ? null : item.id)
-          }
-        />
-      ))}
-    </div>
-  </div>
-</section>
+          <div className="bg-white rounded-xl shadow-sm p-4">
+            {faqData.map((item) => (
+              <WorkflowItem
+                key={item.id}
+                step={item}
+                isActive={activeFaq === item.id}
+                onClick={() =>
+                  setActiveFaq(activeFaq === item.id ? null : item.id)
+                }
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+      <section className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-6 md:px-10">
+          <h2 className="text-center text-2xl md:text-3xl font-bold text-secondary mb-10 uppercase">
+            App FIXHOME - Đặt Thợ Nhanh
+          </h2>
 
-<section className="py-16 bg-white">
-  <div className="max-w-7xl mx-auto px-6 md:px-10">
-    <h2 className="text-center text-2xl md:text-3xl font-bold text-secondary mb-10 uppercase">
-      App FIXHOME - Đặt Thợ Nhanh
-    </h2>
-
-    <img
-      src={appPromo}
-      alt="App Thợ Việt - Đặt Thợ Nhanh"
-      className="w-full rounded-lg shadow-md object-cover"
-    />
-  </div>
-</section>
-
-
+          <img
+            src={appPromo}
+            alt="App Thợ Việt - Đặt Thợ Nhanh"
+            className="w-full rounded-lg shadow-md object-cover"
+          />
+        </div>
+      </section>
     </main>
   );
 };

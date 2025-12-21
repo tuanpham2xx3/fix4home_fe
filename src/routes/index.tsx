@@ -13,6 +13,8 @@ import WoodService from "@/pages/User/WoodService";
 import CleaningService from "@/pages/User/CleaningService";
 import MovingService from "@/pages/User/MovingService";
 import DrainCleaningService from "@/pages/User/DrainCleaningService";
+import AppIntroPage from "@/pages/User/AppIntroPage";
+import PricingPage from "@/pages/User/PricingPage";
 
 const AppRoutes: React.FC = () => {
   return (
@@ -97,6 +99,22 @@ const AppRoutes: React.FC = () => {
         element={
           <MainLayout>
             <DrainCleaningService />
+          </MainLayout>
+        }
+      />
+        <Route
+        path="/ung-dung"
+        element={
+          <MainLayout>
+            <AppIntroPage />
+          </MainLayout>
+        }
+      />
+      <Route
+        path="/bang-gia"
+        element={
+          <MainLayout>
+            <PricingPage />
           </MainLayout>
         }
       />

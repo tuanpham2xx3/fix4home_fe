@@ -33,6 +33,12 @@ import chuyenNha from "./chuyennha.png";
 import thongNghet from "./thongnghet.png";
 import baoHanh from "./baohanh.jpg";
 import xayDung from "./xaydung.jpg";
+import ungDung2 from "./ungdung2.png";
+import ungDungStep1 from "./ungdungstep1.jpg";
+import ungDungStep2 from "./ungdungstep2.jpg";
+import ungDungStep3 from "./ungdungstep3.jpg";
+import ungDungStep4 from "./ungdungstep4.jpg";
+import ungDungStep5 from "./ungdungstep5.jpg";
 export {
   about,
   featureBg,
@@ -69,4 +75,10 @@ export {
   thongNghet,
   baoHanh,
   xayDung,
+  ungDung2,
+  ungDungStep1,
+  ungDungStep2,
+  ungDungStep3,
+  ungDungStep4,
+  ungDungStep5,
 };
