@@ -18,11 +18,13 @@ import PricingPage from "@/pages/User/PricingPage";
 import ContactPage from "@/pages/User/ContactPage";
 import Login from "@/pages/Auth/Login";
 import Register from "@/pages/Auth/Register";
+import Congratulations from "@/pages/Auth/Congratulations";
+import PrivateRoute from "./PrivateRoute";
 
 const AppRoutes: React.FC = () => {
   return (
     <Routes>
-        <Route
+      <Route
         path="/dang-nhap"
         element={
           <MainLayout>
@@ -35,6 +37,15 @@ const AppRoutes: React.FC = () => {
         element={
           <MainLayout>
             <Register />
+          </MainLayout>
+        }
+      />
+
+      <Route
+        path="/congratulations"
+        element={
+          <MainLayout>
+            <Congratulations />
           </MainLayout>
         }
       />
@@ -57,7 +68,7 @@ const AppRoutes: React.FC = () => {
           </MainLayout>
         }
       />
-       <Route
+      <Route
         path="/cokhi"
         element={
           <MainLayout>
@@ -105,7 +116,7 @@ const AppRoutes: React.FC = () => {
           </MainLayout>
         }
       />
-       <Route
+      <Route
         path="/chuyen-nha"
         element={
           <MainLayout>
@@ -121,7 +132,7 @@ const AppRoutes: React.FC = () => {
           </MainLayout>
         }
       />
-        <Route
+      <Route
         path="/ung-dung"
         element={
           <MainLayout>
@@ -137,7 +148,7 @@ const AppRoutes: React.FC = () => {
           </MainLayout>
         }
       />
-       <Route
+      <Route
         path="/lien-he"
         element={
           <MainLayout>
@@ -145,6 +156,27 @@ const AppRoutes: React.FC = () => {
           </MainLayout>
         }
       />
+
+      {/* PRIVATE ROUTES */}
+      <Route element={<PrivateRoute />}>
+        <Route
+          path="/don-lich"
+          element={
+            <MainLayout>
+              <div>Trang đơn & lịch</div>
+            </MainLayout>
+          }
+        />
+
+        <Route
+          path="/tai-khoan"
+          element={
+            <MainLayout>
+              <div>Trang tài khoản</div>
+            </MainLayout>
+          }
+        />
+      </Route>
     </Routes>
   );
 };

@@ -1,16 +1,13 @@
 import { useState } from "react";
-import {
-  isEmailOrPhone,
-  isValidEmail,
-  isValidVietnamPhone,
-  isValidPassword,
-} from "@/utils/validators";
+import { isValidEmail, isValidPassword } from "@/utils/validators";
+import { authApi } from "@/api/auth.api";
 import { useAuth } from "@/contexts/AuthContext";
 
 export type AuthMode = "login" | "register";
 
 export const useAuthForm = (mode: AuthMode) => {
-      const { login } = useAuth(); 
+  const { login: setAuth } = useAuth(); // ✅ LẤY TỪ CONTEXT
+
   const [form, setForm] = useState<Record<string, string>>({});
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [loading, setLoading] = useState(false);
@@ -22,17 +19,17 @@ export const useAuthForm = (mode: AuthMode) => {
   const validate = () => {
     const e: Record<string, string> = {};
 
-    if (mode === "login") {
-      if (!isEmailOrPhone(form.identifier || "")) {
-        e.identifier = "Email hoặc số điện thoại không hợp lệ";
+    if (mode === "register") {
+      if (!form.name?.trim()) {
+        e.name = "Vui lòng nhập họ tên";
+      }
+
+      if (!isValidEmail(form.email || "")) {
+        e.email = "Email không hợp lệ";
       }
     }
 
-    if (mode === "register") {
-      if (!form.name?.trim()) e.name = "Vui lòng nhập họ tên";
-      if (!isValidVietnamPhone(form.phone || "")) {
-        e.phone = "Số điện thoại không hợp lệ";
-      }
+    if (mode === "login") {
       if (!isValidEmail(form.email || "")) {
         e.email = "Email không hợp lệ";
       }
@@ -46,31 +43,66 @@ export const useAuthForm = (mode: AuthMode) => {
     return Object.keys(e).length === 0;
   };
 
-  const submit = async () => {
+  /* ================= REGISTER ================= */
+
+  const submitRegister = async (): Promise<string | null> => {
+    if (mode !== "register") return null;
+    if (!validate()) return null;
+
+    setLoading(true);
+    try {
+      await authApi.register(form.email, form.password);
+      return form.email;
+    } catch (err: any) {
+      setErrors({
+        email: err.response?.data?.userMessage || "Đăng ký thất bại",
+      });
+      return null;
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  /* ================= LOGIN ================= */
+
+  const submitLogin = async (): Promise<boolean> => {
+    if (mode !== "login") return false;
     if (!validate()) return false;
 
     setLoading(true);
+    try {
+      const res = await authApi.login(form.email, form.password);
+      const data = res.data.data;
 
-    // ⏳ fake delay để mô phỏng call API
-    await new Promise((res) => setTimeout(res, 1000));
+      if (data.status !== "ACTIVE") {
+        setErrors({
+          email: "Tài khoản chưa được kích hoạt",
+        });
+        return false;
+      }
+      setAuth(
+        {
+          userId: data.userId,
+          name: data.username,
+          email: data.email,
+          role: "CUSTOMER", 
+          status: data.status,
+        },
+        data.accessToken,
+        data.refreshToken
+      );
 
-   if (mode === "login") {
-  login({
-    name: form.name,        // nếu có
-    identifier: form.identifier,
-  });
-}
-
-if (mode === "register") {
-  login({
-    name: form.name,
-    email: form.email,
-    phone: form.phone,
-  });
-}
-
-    setLoading(false);
-    return true;
+      return true;
+    } catch (err: any) {
+      setErrors({
+        email:
+          err.response?.data?.userMessage ||
+          "Email hoặc mật khẩu không đúng",
+      });
+      return false;
+    } finally {
+      setLoading(false);
+    }
   };
 
   return {
@@ -78,6 +110,7 @@ if (mode === "register") {
     errors,
     loading,
     update,
-    submit,
+    submitRegister,
+    submitLogin,
   };
 };

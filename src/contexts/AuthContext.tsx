@@ -1,16 +1,17 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 
 interface AuthUser {
+  userId?: number;
   name?: string;
   email?: string;
-  phone?: string;
-  identifier?: string;
+  role?: "CUSTOMER" | "TECHNICIAN" | "ADMIN";
+  status?: string;
 }
 
 interface AuthContextType {
   user: AuthUser | null;
   isAuthenticated: boolean;
-  login: (user: AuthUser) => void;
+  login: (user: AuthUser, accessToken: string, refreshToken?: string) => void;
   logout: () => void;
 }
 
@@ -22,20 +23,42 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   const [user, setUser] = useState<AuthUser | null>(null);
 
   useEffect(() => {
-    const stored = localStorage.getItem("auth_user");
-    if (stored) {
-      setUser(JSON.parse(stored));
+    const storedUser = localStorage.getItem("auth_user");
+    const accessToken = localStorage.getItem("accessToken");
+
+    if (storedUser && accessToken) {
+      try {
+        const parsedUser = JSON.parse(storedUser);
+        setUser(parsedUser);
+      } catch {
+        // dữ liệu hỏng → xoá để tránh lỗi
+        localStorage.removeItem("auth_user");
+        localStorage.removeItem("accessToken");
+        localStorage.removeItem("refreshToken");
+        setUser(null);
+      }
     }
   }, []);
 
-const login = (userData: AuthUser) => {
-  localStorage.setItem("auth_user", JSON.stringify(userData));
-  setUser(userData);
-};
+  const login = (
+    userData: AuthUser,
+    accessToken: string,
+    refreshToken?: string
+  ) => {
+    localStorage.setItem("auth_user", JSON.stringify(userData));
+    localStorage.setItem("accessToken", accessToken);
 
+    if (refreshToken) {
+      localStorage.setItem("refreshToken", refreshToken);
+    }
+
+    setUser(userData);
+  };
 
   const logout = () => {
     localStorage.removeItem("auth_user");
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
     setUser(null);
   };
 

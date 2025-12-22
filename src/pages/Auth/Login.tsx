@@ -14,10 +14,12 @@ const navigate = useNavigate();
   mode="login"
   {...auth}
   onSubmit={async () => {
-    const success = await auth.submit();
-    if (success) {
-      navigate("/"); // ✅ về trang chủ
-    }
+
+    const success = await auth.submitLogin();
+if (success) {
+  navigate("/");
+}
+
   }}
 />
 

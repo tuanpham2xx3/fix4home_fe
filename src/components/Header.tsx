@@ -22,8 +22,7 @@ const Header = () => {
     setActiveMenu(activeMenu === menuName ? null : menuName);
   };
 
-  const displayName =
-    user?.name || user?.email || user?.phone || user?.identifier || "User";
+ const displayName = user?.name || "Khách hàng";
   const avatarChar = displayName.charAt(0).toUpperCase();
 
   return (
