@@ -2,16 +2,15 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { menuItems, MenuItem } from "../utils/menuData";
 import { IoMdMenu, IoMdClose } from "react-icons/io";
-import { IoNotificationsOutline, IoCalendarOutline } from "react-icons/io5";
+import {IoCalendarOutline } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
+import NotificationBell from "@/components/NotificationBell";
 
 const Header = () => {
   const MenuIconComponent = IoMdMenu as React.ElementType;
   const CloseIconComponent = IoMdClose as React.ElementType;
-  const NotificationIcon = IoNotificationsOutline as React.FC<{
-    size?: number;
-  }>;
+ 
   const CalendarIcon = IoCalendarOutline as React.FC<{ size?: number }>;
 
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
@@ -130,26 +129,8 @@ const Header = () => {
             </>
           ) : (
             <div className="flex items-center gap-3 h-full">
-              {/* 🔔 THÔNG BÁO */}
-              <Link
-                to="/thong-bao"
-                title="Thông báo"
-                className="
-      relative
-      flex items-center justify-center
-      w-5 h-5
-      rounded-full
-      text-secondary
-      hover:text-dark
-      hover:bg-black/5
-      transition
-    "
-              >
-                <NotificationIcon size={22} />
-                <span className="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] rounded-full px-1 leading-none">
-                  2
-                </span>
-              </Link>
+              {/*  THÔNG BÁO */}
+             <NotificationBell isLoggedIn={isAuthenticated} />
 
               {/* 📅 ĐƠN / LỊCH */}
               <Link

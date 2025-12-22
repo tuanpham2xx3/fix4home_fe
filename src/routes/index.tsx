@@ -22,6 +22,7 @@ import Congratulations from "@/pages/Auth/Congratulations";
 import PrivateRoute from "./PrivateRoute";
 import BookingPage from "@/pages/Booking/BookingPage";
 import MyBookingsPage from "@/pages/Booking/MyBookingsPage";
+import NotificationPage from "@/pages/Notification/NotificationPage";
 
 const AppRoutes: React.FC = () => {
   return (
@@ -165,16 +166,25 @@ const AppRoutes: React.FC = () => {
           path="/don-lich"
           element={
             <MainLayout>
-          <BookingPage />
+              <BookingPage />
             </MainLayout>
           }
         />
-          <Route
+        <Route
           path="/lich-hen"
           element={
             <MainLayout>
-          <MyBookingsPage />
-          </MainLayout>
+              <MyBookingsPage />
+            </MainLayout>
+          }
+        />
+
+        <Route
+          path="/thong-bao"
+          element={
+            <MainLayout>
+              <NotificationPage />
+            </MainLayout>
           }
         />
 
