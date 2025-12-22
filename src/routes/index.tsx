@@ -20,6 +20,8 @@ import Login from "@/pages/Auth/Login";
 import Register from "@/pages/Auth/Register";
 import Congratulations from "@/pages/Auth/Congratulations";
 import PrivateRoute from "./PrivateRoute";
+import BookingPage from "@/pages/Booking/BookingPage";
+import MyBookingsPage from "@/pages/Booking/MyBookingsPage";
 
 const AppRoutes: React.FC = () => {
   return (
@@ -163,8 +165,16 @@ const AppRoutes: React.FC = () => {
           path="/don-lich"
           element={
             <MainLayout>
-              <div>Trang đơn & lịch</div>
+          <BookingPage />
             </MainLayout>
+          }
+        />
+          <Route
+          path="/lich-hen"
+          element={
+            <MainLayout>
+          <MyBookingsPage />
+          </MainLayout>
           }
         />
 
