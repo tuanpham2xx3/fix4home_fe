@@ -70,29 +70,31 @@ const Home = () => {
           </div>
 
           {/* RIGHT IMAGE */}
-          <div className="md:w-1/2 relative flex justify-center">
-            <img
-              src="https://thoviet.com.vn/wp-content/uploads/2025/09/tho-viet-new.png"
-              alt="FixHome Hero"
-              className="relative z-0 w-[90%] md:w-[80%] h-auto object-contain"
-            />
+          <div className="md:w-1/2 relative flex justify-center overflow-hidden">
+      <img
+        src="https://thoviet.com.vn/wp-content/uploads/2025/09/tho-viet-new.png"
+        alt="FixHome Hero"
+        className="relative z-0 w-[90%] md:w-[80%] h-auto object-contain"
+      />
 
-            <img
-              src="https://thoviet.com.vn/wp-content/uploads/2025/09/Co-mat-dung.png"
-              alt="Có mặt nhanh chóng"
-              className="absolute z-10 w-[25%] left-[-40px] top-[15%] animate-float"
-            />
-            <img
-              src="https://thoviet.com.vn/wp-content/uploads/2025/09/14.png"
-              alt="Biểu đồ dịch vụ"
-              className="absolute z-10 w-[20%] right-[-10px] top-[-10px] animate-float delay-100"
-            />
-            <img
-              src="https://thoviet.com.vn/wp-content/uploads/2025/09/20.png"
-              alt="200+ thợ sửa chữa"
-              className="absolute z-10 w-[60%] bottom-0 left-1/2 -translate-x-1/2 animate-float delay-200"
-            />
-          </div>
+      <img
+        src="https://thoviet.com.vn/wp-content/uploads/2025/09/Co-mat-dung.png"
+        alt="Có mặt nhanh chóng"
+        className="absolute z-10 w-[25%] left-0 top-[15%] -translate-x-1/2 animate-float"
+      />
+
+      <img
+        src="https://thoviet.com.vn/wp-content/uploads/2025/09/14.png"
+        alt="Biểu đồ dịch vụ"
+        className="absolute z-10 w-[20%] right-0 top-0 translate-x-1/3 animate-float delay-100"
+      />
+
+      <img
+        src="https://thoviet.com.vn/wp-content/uploads/2025/09/20.png"
+        alt="200+ thợ sửa chữa"
+        className="absolute z-10 w-[60%] bottom-0 left-1/2 -translate-x-1/2 animate-float delay-200"
+      />
+    </div>
         </div>
       </section>
       {/* About Section */}

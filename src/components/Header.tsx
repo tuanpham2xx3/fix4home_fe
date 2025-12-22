@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { menuItems, MenuItem } from "../utils/menuData";
 import { IoMdMenu, IoMdClose } from "react-icons/io";
 import { IoNotificationsOutline, IoCalendarOutline } from "react-icons/io5";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 
 const Header = () => {
@@ -16,29 +17,34 @@ const Header = () => {
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { user, isAuthenticated, logout } = useAuth();
+  const navigate = useNavigate();
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
 
   const toggleMenu = (menuName: string) => {
     setActiveMenu(activeMenu === menuName ? null : menuName);
   };
 
- const displayName = user?.name || "Khách hàng";
+  const displayName = user?.name || "Khách hàng";
   const avatarChar = displayName.charAt(0).toUpperCase();
+  const handleLogout = () => {
+    logout();
+    navigate("/dang-nhap", { replace: true });
+  };
 
   return (
     <header className="sticky top-0 bg-primary text-dark shadow-md z-50 h-[72px] flex items-center">
-      <div className="mx-10 flex justify-between items-center w-full h-full px-6">
+      <div className="flex justify-between items-center w-full h-full px-4 md:px-8 lg:px-10">
         {/* LOGO */}
         <Link
           to="/"
-          className="text-2xl font-extrabold tracking-wide text-secondary font-heading flex items-center"
+          className="text-2xl font-extrabold tracking-wide text-secondary font-heading"
         >
           FixHome
         </Link>
 
         {/* MOBILE MENU BUTTON */}
         <button
-          className="text-secondary text-3xl md:hidden focus:outline-none flex items-center"
+          className="ml-4 text-secondary text-3xl 3xl:hidden focus:outline-none"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         >
           {isMobileMenuOpen ? (
@@ -49,7 +55,7 @@ const Header = () => {
         </button>
 
         {/* DESKTOP MENU */}
-        <nav className="hidden md:flex items-center gap-[0.1rem] text-[15px] leading-none tracking-wide relative px-10 flex-nowrap whitespace-nowrap flex-1 h-full">
+        <nav className="hidden 3xl:flex items-center gap-[0.1rem] flex-1 justify-center">
           {menuItems.map((item: MenuItem) => (
             <div
               key={item.name}
@@ -105,19 +111,19 @@ const Header = () => {
           ))}
         </nav>
         {/* AUTH ACTIONS – DESKTOP */}
-        <div className="hidden md:flex items-center gap-2 px-2 ml-auto h-full">
+        <div className="flex items-center ml-auto gap-4">
           {!isAuthenticated ? (
             <>
               <Link
                 to="/dang-nhap"
-                className="text-sm font-medium hover:text-secondary"
+                className="px-3 py-2 text-sm font-medium rounded-md hover:bg-black/5 transition"
               >
                 Đăng nhập
               </Link>
 
               <Link
                 to="/dang-ky"
-                className="px-4 py-2 rounded-lg bg-secondary text-white text-sm font-medium hover:opacity-90"
+                className="px-5 py-2 rounded-lg bg-secondary text-white text-sm font-semibold hover:opacity-90 transition"
               >
                 Đăng ký
               </Link>
@@ -175,7 +181,9 @@ const Header = () => {
                   </div>
 
                   {/* NAME */}
-                  <span className="text-sm font-medium">{displayName}</span>
+                  <span className="text-xs md:text-sm font-medium">
+                    {displayName}
+                  </span>
                 </button>
 
                 {/* DROPDOWN */}
@@ -190,10 +198,7 @@ const Header = () => {
                     </Link>
 
                     <button
-                      onClick={() => {
-                        logout();
-                        setIsUserMenuOpen(false);
-                      }}
+                      onClick={handleLogout}
                       className="w-full text-left px-4 py-2 hover:bg-light text-red-500"
                     >
                       Đăng xuất
@@ -208,7 +213,7 @@ const Header = () => {
 
       {/* MOBILE MENU */}
       {isMobileMenuOpen && (
-        <div className="md:hidden bg-white text-dark shadow-lg absolute top-full left-0 w-full border-t border-secondary animate-slide-down">
+        <div className="3xl:hidden bg-white text-dark shadow-lg absolute top-full left-0 w-full border-t border-secondary animate-slide-down">
           <nav className="flex flex-col p-4 space-y-2">
             {menuItems.map((item: MenuItem) => (
               <div key={item.name} className="relative">

@@ -5,6 +5,7 @@
 @tailwind utilities;
 
 
+
 @layer base {
   body {
     @apply font-sans text-dark bg-light m-0 p-0 scroll-smooth;

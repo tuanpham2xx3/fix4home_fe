@@ -2,8 +2,9 @@
 
 const Footer = () => {
   return (
-    <footer className="bg-primary text-dark py-10 px-6">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+   <footer className="bg-primary text-dark py-10 px-6">
+  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
 
         {/* === CỘT 1: Thông tin công ty === */}
         <div>
