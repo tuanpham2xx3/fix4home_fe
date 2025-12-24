@@ -2,12 +2,11 @@ import { useState } from "react";
 import ChatButton from "./ChatButton";
 import ChatWindow from "./ChatWindow";
 import { ChatMessage } from "@/types/chat";
+import { sendGuestChat } from "@/services/chat.service";
 
 const ChatboxRoot = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-
-
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       id: "init",
@@ -16,33 +15,57 @@ const ChatboxRoot = () => {
       createdAt: Date.now(),
     },
   ]);
-
- const sendMessage = (text: string) => {
-  if (!text.trim() || isLoading) return;
-
-  const userMessage: ChatMessage = {
-    id: crypto.randomUUID(),
-    role: "user",
-    content: text,
-    createdAt: Date.now(),
+  const getGuestSessionId = () => {
+    let sessionId = localStorage.getItem("fixhome_guest_session");
+    if (!sessionId) {
+      sessionId = crypto.randomUUID();
+      localStorage.setItem("fixhome_guest_session", sessionId);
+    }
+    return sessionId;
   };
 
-  setMessages((prev) => [...prev, userMessage]);
-  setIsLoading(true);
+  const sendMessage = async (text: string) => {
+    if (!text.trim() || isLoading) return;
 
-  setTimeout(() => {
-    const aiMessage: ChatMessage = {
+    const userMessage: ChatMessage = {
       id: crypto.randomUUID(),
-      role: "assistant",
-      content: "FixHome đã nhận yêu cầu của bạn. Tôi sẽ hỗ trợ ngay 👌",
+      role: "user",
+      content: text,
       createdAt: Date.now(),
     };
 
-    setMessages((prev) => [...prev, aiMessage]);
-    setIsLoading(false);
-  }, 1000);
-};
+    setMessages((prev) => [...prev, userMessage]);
+    setIsLoading(true);
 
+    try {
+      const sessionId = getGuestSessionId();
+
+      const res = await sendGuestChat(sessionId, text);
+
+      const aiMessage: ChatMessage = {
+        id: crypto.randomUUID(),
+        role: "assistant",
+        content: res.reply,
+        createdAt: Date.now(),
+      };
+
+      setMessages((prev) => [...prev, aiMessage]);
+    } catch (error) {
+      console.error(error);
+
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: crypto.randomUUID(),
+          role: "assistant",
+          content: "Xin lỗi, FixHome AI đang bận. Vui lòng thử lại sau.",
+          createdAt: Date.now(),
+        },
+      ]);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <>
@@ -52,7 +75,7 @@ const ChatboxRoot = () => {
           onClose={() => setIsOpen(false)}
           messages={messages}
           onSend={sendMessage}
-           isLoading={isLoading}
+          isLoading={isLoading}
         />
       )}
     </>
